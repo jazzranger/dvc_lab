@@ -1,0 +1,28 @@
+stages:
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+    - data/iris.csv
+    - src/prepare.py
+    outs:
+    - data/prepared/X_test.csv
+    - data/prepared/X_train.csv
+    - data/prepared/y_test.csv
+    - data/prepared/y_train.csv
+  train:
+    cmd: python src/train.py
+    deps:
+    - data/prepared/X_train.csv
+    - data/prepared/y_train.csv
+    - src/train.py
+    outs:
+    - model/model.joblib
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - data/prepared/X_test.csv
+    - data/prepared/y_test.csv
+    - model/model.joblib
+    - src/evaluate.py
+    metrics:
+    - metrics/predict.json
