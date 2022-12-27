@@ -10,7 +10,7 @@ if __name__ == '__main__':
     X_train = pd.read_csv('data/prepared/X_train.csv')
     y_train = pd.read_csv('data/prepared/y_train.csv')
 
-    classifier = KMeans()
+    classifier = KMeans(n_clusters=3, max_iter=700)
     # Applying classifier on training data
     classifier = classifier.fit(X_train, y_train)
     joblib.dump(classifier, 'model/model.joblib')
